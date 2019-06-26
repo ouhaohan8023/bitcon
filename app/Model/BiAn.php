@@ -25,7 +25,7 @@ class BiAn extends Model
       $data['bid_qty'] = $r['bidQty'];
       $data['ask_price'] = $r['askPrice'];//最低卖价
       $data['ask_qty'] = $r['askQty'];
-      TrickerData::create($data);
+//      TrickerData::create($data);
       return $data;
     } else {
       Log::info('httpError:BIAN', $res);
