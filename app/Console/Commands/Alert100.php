@@ -57,10 +57,34 @@ class Alert100 extends Command
           $method = 'sendMessage';
           $backMsg['chat_id'] = env('TELEGRAM_GROUP');
           $backMsg['text'] = $tgMsg;
-          $backMsg['parse_mode'] = 'Markdown';
+//          $backMsg['parse_mode'] = 'Markdown';
           telegramFunction($method, $backMsg);
+          $this->check();
         }
         sleep(11);
       }
+    }
+
+    protected function check () {
+      $sell = json_decode($this->checkRequest(0),true);
+      $sell_price = $sell['data'][0]['match']['amount'];
+      $buy = json_decode($this->checkRequest(1),true);
+      $buy_price = $buy['data'][0]['match']['amount'];
+      $tgMsg = env('CHECK_HUOBI_BTC_QTY').' BTC 当前卖出价格：'.$sell_price."，\n\r 当前买入价格：".$buy_price."，\n\r ";
+      $method = 'sendMessage';
+      $backMsg['chat_id'] = env('TELEGRAM_GROUP');
+      $backMsg['text'] = $tgMsg;
+//      $backMsg['parse_mode'] = 'Html';
+      telegramFunction($method, $backMsg);
+    }
+
+    protected function checkRequest ($matchType = 0) {
+      $url = env('CHECK_HUOBI_URL');
+      $data['coinId'] = 1;
+      $data['currencyId'] = 1;
+      $data['matchType'] = $matchType;//0买币，1卖币
+      $data['quantity'] = env('CHECK_HUOBI_BTC_QTY');
+      $r = curlGet($url,'post',$data);
+      return $r;
     }
 }
