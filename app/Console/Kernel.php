@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\Alert100;
 use App\Console\Commands\ClearDatabase;
 use App\Console\Commands\GetTrick;
 use Illuminate\Console\Scheduling\Schedule;
@@ -16,7 +17,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         GetTrick::class,
-        ClearDatabase::class
+        ClearDatabase::class,
+        Alert100::class
     ];
 
     /**
@@ -27,9 +29,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-      $schedule->command('get_trick BiAn')->everyMinute();
-      $schedule->command('get_trick HuoBi')->everyMinute();
-      $schedule->command('clear_database')->everyMinute();
+//      $schedule->command('get_trick BiAn')->everyMinute();
+//      $schedule->command('get_trick HuoBi')->everyMinute();
+//      $schedule->command('clear_database')->everyMinute();
+//      $schedule->command('count_trick')->everyMinute();
+      $schedule->command('alert100')->everyMinute();
     }
 
     /**

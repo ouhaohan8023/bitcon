@@ -15,7 +15,6 @@ class HuoBi extends Model
   {
     $url = 'https://api.huobi.pro';
     $path = "/market/depth?";//最优挂单接口
-    $u = $url . $path;
     $data['symbol'] = "btcusdt";
     $data['depth'] = "10";
     $data['type'] = "step0";

@@ -15,12 +15,12 @@ class CreateTrickerData extends Migration
     {
         Schema::create('tricker_data', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('symbol');
-            $table->string('platform');
-            $table->decimal('bid_price', 20, 10);
-            $table->decimal('bid_qty', 40, 20);
-            $table->decimal('ask_price', 20, 10);
-            $table->decimal('ask_qty', 40, 20);
+            $table->string('symbol')->comment('币种');
+            $table->string('platform')->comment('平台');
+            $table->decimal('bid_price', 20, 10)->comment('买方价格');
+            $table->decimal('bid_qty', 40, 20)->comment('买方挂单数量');
+            $table->decimal('ask_price', 20, 10)->comment('卖方价格');
+            $table->decimal('ask_qty', 40, 20)->comment('卖方挂单数量');
             $table->timestamps();
         });
     }
