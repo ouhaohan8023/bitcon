@@ -47,7 +47,11 @@ class Alert100 extends Command
       for ($i=1;$i<=5;$i++){
         $hb = BiAn::getTrick();
         $last = Redis::get('last_btc_usdt');
+        if (!$last) {
+          $last = 0;
+        }
         if (abs($hb['ask_price'] - $last) >= 100) {
+          Redis::set('last_btc_usdt',$hb['ask_price']);
           $tgMsg = '波动超过100，现价：'.$hb['ask_price'].'，原价：'.$last;
           $method = 'sendMessage';
           $backMsg['chat_id'] = env('TELEGRAM_GROUP');
