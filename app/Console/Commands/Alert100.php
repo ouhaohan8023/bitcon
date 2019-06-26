@@ -50,6 +50,7 @@ class Alert100 extends Command
         if (!$last) {
           $last = 0;
         }
+        Log::info('log',[$hb['ask_price'],$last]);
         if (abs($hb['ask_price'] - $last) >= 100) {
           Redis::set('last_btc_usdt',$hb['ask_price']);
           $tgMsg = '波动超过100，现价：'.$hb['ask_price'].'，原价：'.$last;
